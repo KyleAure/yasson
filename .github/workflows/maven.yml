@@ -24,12 +24,17 @@ on:
 
 jobs:
   build:
-    name: Test on JDK ${{ matrix.java_version }}
+    name: Test on JDK ${{ matrix.java_version }} locale ${{ matrix.locale }}
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         java_version: [ 11, 17, 21 ]
+        locale: [ en_US, en_GB ]
+
+    env:
+      LANG: ${{ matrix.locale }}.UTF-8
+      LC_ALL: ${{ matrix.locale }}.UTF-8
 
     steps:
       - name: Checkout for build
@@ -50,8 +55,5 @@ jobs:
         run: mvn -U -C clean install -DskipTests
       - name: Yasson tests
         run: mvn -U -B -C -Dmaven.javadoc.skip=true verify
-      # Display numbers/dates using a different locale to ensure that the internationalization code is working properly
-      - name: Yasson international tests
-        run: mvn -U -B -C -Dmaven.javadoc.skip=true -Duser.language=en -Duser.country=GB verify
       - name: JSONB-API TCK
         run: cd yasson-tck && mvn -U -B test -DargLine="-Djava.locale.providers=COMPAT"
