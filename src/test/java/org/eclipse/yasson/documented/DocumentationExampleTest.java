@@ -351,7 +351,7 @@ public class DocumentationExampleTest {
         @JsonbDateFormat("dd.MM.yyyy")
         public LocalDate birthDate;
 
-        @JsonbNumberFormat("#0.00")
+        @JsonbNumberFormat(value = "#0.00")
         public BigDecimal salary;
     }
     
@@ -375,6 +375,7 @@ public class DocumentationExampleTest {
 
         public LocalDate birthDate;
 
+        @JsonbNumberFormat(value = "#0.00") // TODO: remove if withNumberFormat is added to JsonbConfig builder
         public BigDecimal salary;
     }
     
@@ -385,14 +386,14 @@ public class DocumentationExampleTest {
         p.birthDate = LocalDate.of(1999, 8, 7);
         p.salary = new BigDecimal("123.45678");
         Jsonb jsonb = JsonbBuilder.create(new JsonbConfig()//
-                .withDateFormat("dd.MM.yyyy", null)); // TODO: why no withNumberFormat?
+                .withDateFormat("dd.MM.yyyy", null)); // TODO: add withNumberFormat if added to JsonbConfig builder
         String json = jsonb.toJson(p);
-        assertEquals("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":123.45678}", json);
+        assertEquals("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":123.46}", json);
         
-        Person9 after = jsonb.fromJson("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":123.45678}", Person9.class);
+        Person9 after = jsonb.fromJson("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":123.46}", Person9.class);
         assertEquals(p.name, after.name);
         assertEquals(p.birthDate, after.birthDate);
-        assertEquals(p.salary, after.salary);
+        assertEquals(new BigDecimal("123.46"), after.salary);
     }
     
     public static class Customer {

@@ -30,11 +30,12 @@ jobs:
     strategy:
       matrix:
         java_version: [ 11, 17, 21 ]
-        locale: [ en_US, en_GB ]
-
-    env:
-      LANG: ${{ matrix.locale }}.UTF-8
-      LC_ALL: ${{ matrix.locale }}.UTF-8
+        include:
+          - locale: en_US
+          # Use a different locale when running against once of the java versions
+          # to ensure we correctly write tests that account for localization differences.
+          - locale: de_AT
+            java_version: 21
 
     steps:
       - name: Checkout for build
@@ -54,6 +55,12 @@ jobs:
       - name: Yasson install
         run: mvn -U -C clean install -DskipTests
       - name: Yasson tests
-        run: mvn -U -B -C -Dmaven.javadoc.skip=true verify
+        run: |
+          export LANG_TAG="${{ matrix.locale }}"
+          mvn -U -B -C \
+            -Dmaven.javadoc.skip=true \
+            -Duser.language="${LANG_TAG%%_*}" \
+            -Duser.country="${LANG_TAG##*_}" \
+            verify
       - name: JSONB-API TCK
         run: cd yasson-tck && mvn -U -B test -DargLine="-Djava.locale.providers=COMPAT"
