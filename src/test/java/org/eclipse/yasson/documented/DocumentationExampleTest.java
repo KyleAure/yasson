@@ -351,7 +351,7 @@ public class DocumentationExampleTest {
         @JsonbDateFormat("dd.MM.yyyy")
         public LocalDate birthDate;
 
-        @JsonbNumberFormat(value = "#0.00")
+        @JsonbNumberFormat(value = "#0.00", locale="en_US")
         public BigDecimal salary;
     }
     
@@ -375,11 +375,11 @@ public class DocumentationExampleTest {
 
         public LocalDate birthDate;
 
-        @JsonbNumberFormat(value = "#0.00") // TODO: remove if withNumberFormat is added to JsonbConfig builder
+        @JsonbNumberFormat(value = "#0.00", locale="en_US") // TODO: remove if withNumberFormat is added to JsonbConfig builder
         public BigDecimal salary;
     }
     
-    @Test
+    @Test //TODO https://github.com/eclipse-ee4j/yasson/issues/722
     public void testDateNumberFormats2() {
         Person10 p = new Person10();
         p.name = "Jason Bourne";
@@ -388,9 +388,9 @@ public class DocumentationExampleTest {
         Jsonb jsonb = JsonbBuilder.create(new JsonbConfig()//
                 .withDateFormat("dd.MM.yyyy", null)); // TODO: add withNumberFormat if added to JsonbConfig builder
         String json = jsonb.toJson(p);
-        assertEquals("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":123.46}", json);
+        assertEquals("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":\"123.46\"}", json);
         
-        Person9 after = jsonb.fromJson("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":123.46}", Person9.class);
+        Person9 after = jsonb.fromJson("{\"birthDate\":\"07.08.1999\",\"name\":\"Jason Bourne\",\"salary\":\"123.46\"}", Person9.class);
         assertEquals(p.name, after.name);
         assertEquals(p.birthDate, after.birthDate);
         assertEquals(new BigDecimal("123.46"), after.salary);
