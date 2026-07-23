@@ -32,7 +32,7 @@ jobs:
         java_version: [ 11, 17, 21 ]
         include:
           - locale: en_US
-          # Use a different locale when running against once of the java versions
+          # Use a different locale when running against one of the java versions
           # to ensure we correctly write tests that account for localization differences.
           - locale: de_AT
             java_version: 21
