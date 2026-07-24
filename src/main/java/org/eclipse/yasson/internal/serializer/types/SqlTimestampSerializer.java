@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, 2025 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019, 2026 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.Locale;
 
+import org.eclipse.yasson.internal.JsonbDateFormatter;
+
 /**
  * Serializer of the {@link Timestamp} type.
  */
@@ -26,16 +28,10 @@ class SqlTimestampSerializer extends AbstractDateSerializer<Timestamp> {
     /**
      * Default Yasson {@link DateTimeFormatter}.
      */
-    private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ISO_DATE_TIME.withZone(UTC);
+    private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ISO_DATE_TIME.withZone(UTC);
 
     SqlTimestampSerializer(TypeSerializerBuilder serializerBuilder) {
         super(serializerBuilder);
-    }
-
-    @Override
-    protected TemporalAccessor toTemporalAccessor(Timestamp value) {
-        // convert SQL Timestamp into a Instant to unlock TemporalAccessor access
-        return toInstant(value);
     }
 
     @Override
@@ -45,6 +41,21 @@ class SqlTimestampSerializer extends AbstractDateSerializer<Timestamp> {
 
     @Override
     protected String formatDefault(Timestamp value, Locale locale) {
-        return DEFAULT_FORMATTER.withLocale(locale).format(toInstant(value));
+        return DEFAULT_DATE_FORMATTER.withLocale(locale).format(toInstant(value));
+    }
+
+    @Override
+    protected String formatWithFormatter(Timestamp value, DateTimeFormatter formatter) {
+        return getZonedFormatter(formatter).format(toTemporalAccessor(value));
+    }
+
+    @Override
+    protected String formatStrictIJson(Timestamp value) {
+        return JsonbDateFormatter.IJSON_DATE_FORMATTER.withZone(UTC).format(toTemporalAccessor(value));
+    }
+
+    @Override
+    protected TemporalAccessor toTemporalAccessor(Timestamp value) {
+        return toInstant(value);
     }
 }
