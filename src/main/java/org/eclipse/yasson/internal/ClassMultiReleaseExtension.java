@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, 2024 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2021, 2026 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,6 +22,8 @@ import jakarta.json.bind.config.PropertyNamingStrategy;
 
 import org.eclipse.yasson.internal.model.JsonbCreator;
 import org.eclipse.yasson.internal.model.Property;
+import org.eclipse.yasson.internal.properties.MessageKeys;
+import org.eclipse.yasson.internal.properties.Messages;
 
 /**
  * Search for instance creator from other sources.
@@ -33,27 +35,5 @@ public class ClassMultiReleaseExtension {
         throw new IllegalStateException("This class cannot be instantiated");
     }
 
-    static boolean shouldTransformToPropertyName(Method method) {
-        return true;
-    }
-
-    static boolean isSpecialAccessorMethod(Method method, Map<String, Property> classProperties) {
-        return false;
-    }
-
-    static JsonbCreator findCreator(Class<?> clazz,
-                                    Constructor<?>[] declaredConstructors,
-                                    AnnotationIntrospector introspector,
-                                    PropertyNamingStrategy propertyNamingStrategy) {
-        return null;
-    }
-
-    public static boolean isRecord(Class<?> clazz) {
-        return false;
-    }
-
-    public static Optional<JsonbException> exceptionToThrow(Class<?> clazz) {
-        return Optional.empty();
-    }
-
+    // Currently is unused - but could be used in the future.
 }

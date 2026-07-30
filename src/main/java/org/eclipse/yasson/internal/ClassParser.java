@@ -198,14 +198,14 @@ class ClassParser {
         for (Method method : declaredMethods) {
             String name = method.getName();
             //isBridge method filters out methods inherited from interfaces
-            boolean isAccessorMethod = ClassMultiReleaseExtension.isSpecialAccessorMethod(method, classProperties)
+            boolean isAccessorMethod = isSpecialAccessorMethod(method, classProperties)
                     || isPropertyMethod(method);
             if (!isAccessorMethod || method.isBridge() || isSpecialCaseMethod(clazz, method)) {
                 continue;
             }
-            final String propertyName = ClassMultiReleaseExtension.shouldTransformToPropertyName(method)
-                    ? toPropertyMethod(name)
-                    : name;
+            final String propertyName = method.getDeclaringClass().isRecord()
+                    ? name
+                    : toPropertyMethod(name);
 
             registerMethod(propertyName, method, classElement, classProperties);
         }
@@ -263,6 +263,13 @@ class ClassParser {
 
     private static boolean isPropertyMethod(Method m) {
         return isGetter(m) || isSetter(m);
+    }
+
+    private static boolean isSpecialAccessorMethod(Method method, Map<String, Property> classProperties) {
+        return method.getDeclaringClass().isRecord()
+                && method.getParameterCount() == 0
+                && !void.class.equals(method.getReturnType())
+                && classProperties.containsKey(method.getName());
     }
 
     private static void parseFields(JsonbAnnotatedElement<Class<?>> classElement, Map<String, Property> classProperties) {

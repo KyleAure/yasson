@@ -314,50 +314,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>jdk16</id>
-            <activation>
-                <jdk>[16,)</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>default-testCompile</id>
-                                <configuration>
-                                    <release>16</release>
-                                    <testRelease>16</testRelease>
-                                    <compileSourceRoots>
-                                        <compileSourceRoot>${project.basedir}/src/test/java</compileSourceRoot>
-                                        <compileSourceRoot>${project.basedir}/src/test/java16</compileSourceRoot>
-                                    </compileSourceRoots>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <includes>
-                                <include>**/RecordTest.java</include>
-                            </includes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 
     <build>
@@ -387,19 +343,6 @@
                                 <release>17</release>
                             </configuration>
                         </execution>
-                        <execution>
-                            <id>multi-release-compile-16</id>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                            <configuration>
-                                <release>16</release>
-                                <compileSourceRoots>
-                                    <compileSourceRoot>${project.basedir}/src/main/java16</compileSourceRoot>
-                                </compileSourceRoots>
-                                <multiReleaseOutput>true</multiReleaseOutput>
-                            </configuration>
-                        </execution>
                     </executions>
                     <configuration>
                         <compilerArgs>
@@ -411,14 +354,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
-                    <configuration>
-                        <archive>
-                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                            <manifestEntries>
-                                <Multi-Release>true</Multi-Release>
-                            </manifestEntries>
-                        </archive>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <!-- This plugin generates the buildNumber property used in maven-bundle-plugin -->
@@ -498,7 +433,6 @@
                                 <excludes>
                                     <exclude>**/JavaxNamingExcludedTest.java</exclude>
                                     <exclude>**/AnnotationIntrospectorWithoutOptionalModulesTest.java</exclude>
-                                    <exclude>**/*Record*</exclude>
                                 </excludes>
                                 <argLine>
                                     <!--Remove when CDI is updated to support modules
