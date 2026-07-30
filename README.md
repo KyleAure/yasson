@@ -1,11 +1,11 @@
 # Eclipse Yasson
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.eclipse/yasson.svg?label=Maven%20Central)](https://mvnrepository.com/artifact/org.eclipse/yasson)
+[![Maven Central](https://img.shields.io/maven-central/v/org.eclipse.yasson/yasson.svg?label=Maven%20Central)](https://mvnrepository.com/artifact/org.eclipse.yasson/yasson)
 <!-- TODO reenable once snapshots can be browsed via https://central.sonatype.com/service/rest/repository/browse/maven-snapshots
-[![Jakarta Staging (Snapshots)](https://img.shields.io/nexus/s/https/jakarta.oss.sonatype.org/org.eclipse/yasson.svg)](https://jakarta.oss.sonatype.org/content/repositories/staging/org/eclipse/yasson/)
+[![Jakarta Staging (Snapshots)](https://img.shields.io/nexus/s/https/jakarta.oss.sonatype.org/org.eclipse.yasson/yasson.svg)](https://jakarta.oss.sonatype.org/content/repositories/staging/org/eclipse/yasson/yasson/)
 -->
 [![Gitter](https://badges.gitter.im/eclipse/yasson.svg)](https://gitter.im/eclipse/yasson)
-[![Javadocs](https://www.javadoc.io/badge/org.eclipse/yasson.svg)](https://www.javadoc.io/doc/org.eclipse/yasson)
+[![Javadocs](https://www.javadoc.io/badge/org.eclipse.yasson/yasson.svg)](https://www.javadoc.io/doc/org.eclipse.yasson/yasson)
 [![Build Status](https://github.com/eclipse-ee4j/yasson/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/eclipse-ee4j/yasson/actions/workflows/maven.yml?branch=main)
 [![License](https://img.shields.io/badge/License-EPL%202.0-green.svg)](https://opensource.org/licenses/EPL-2.0)
 
