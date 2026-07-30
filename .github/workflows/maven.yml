@@ -29,7 +29,7 @@ jobs:
 
     strategy:
       matrix:
-        java_version: [ 11, 17, 21 ]
+        java_version: [ 17, 21, 25 ]
         include:
           - locale: en_US
           # Use a different locale when running against one of the java versions

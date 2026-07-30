@@ -35,8 +35,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven.compiler.release>11</maven.compiler.release>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
         
         <nexus.staging.repository>yasson-maven2-staging</nexus.staging.repository>
@@ -384,7 +384,7 @@
                         <execution>
                             <id>default-testCompile</id>
                             <configuration>
-                                <release>11</release>
+                                <release>17</release>
                             </configuration>
                         </execution>
                         <execution>
@@ -475,7 +475,7 @@
                                         java.beans;resolution:="optional",
                                         *
                                     </Import-Package>
-                                    <Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version=11))"</Require-Capability>
+                                    <Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version=17))"</Require-Capability>
                                 </instructions>
                             </configuration>
                         </execution>
@@ -544,7 +544,7 @@
                     <configuration>
                         <rules>
                             <requireJavaVersion>
-                                <version>[11,)</version>
+                                <version>[17,)</version>
                             </requireJavaVersion>
                             <requireMavenVersion>
                                 <version>[3.6.0,)</version>
