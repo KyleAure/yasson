@@ -58,7 +58,7 @@
         <jakarta.parson.version>1.1.9</jakarta.parson.version>
 
         <!-- Test dependencies-->
-        <junit-jupiter.version>5.14.4</junit-jupiter.version> <!-- TODO update to Junit 6 when running on Java 17+ -->
+        <junit-jupiter.version>6.1.1</junit-jupiter.version>
         <weld-se-core.version>6.0.4.Final</weld-se-core.version>
 
         <!--Plugins-->

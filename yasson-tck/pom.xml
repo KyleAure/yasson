@@ -31,14 +31,14 @@
         <yasson.version>${project.version}</yasson.version>
 
         <!-- Test Versions -->
-        <junit-jupiter.version>5.14.4</junit-jupiter.version> <!-- TODO update to Junit 6 when running on Java 17+ -->  
+        <junit-jupiter.version>6.1.1</junit-jupiter.version>
         <weld-se-core.version>6.0.4.Final</weld-se-core.version>
-        <arquillian-junit5-container.version>1.8.0.Final</arquillian-junit5-container.version>
+        <arquillian-junit5-container.version>1.10.2.Final</arquillian-junit5-container.version>
 
         <!-- Plugin Versions -->
-        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
-        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-        <maven-surefire-report-plugin.version>3.2.5</maven-surefire-report-plugin.version>
+        <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
+        <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
+        <maven-surefire-report-plugin.version>3.5.6</maven-surefire-report-plugin.version>
     </properties>
 
     <dependencies>

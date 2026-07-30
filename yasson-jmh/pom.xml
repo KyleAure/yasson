@@ -19,7 +19,7 @@
     </description>
 
     <properties>
-        <jmh.version>1.21</jmh.version>
+        <jmh.version>1.37</jmh.version>
         <yasson.version>${project.version}</yasson.version>
     </properties>
 
