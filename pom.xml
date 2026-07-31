@@ -36,8 +36,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <maven.compiler.release>17</maven.compiler.release>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
         
         <nexus.staging.repository>yasson-maven2-staging</nexus.staging.repository>
 
@@ -324,26 +322,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
-                    <!-- defaults for compile and testCompile -->
-                    <executions>
-                        <execution>
-                            <id>default-compile</id>
-                            <goals>
-                                <goal>compile</goal>
-                            </goals>
-                            <configuration>
-                                <release>${maven.compiler.release}</release>
-                                <source>${maven.compiler.release}</source>
-                                <target>${maven.compiler.release}</target>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>default-testCompile</id>
-                            <configuration>
-                                <release>17</release>
-                            </configuration>
-                        </execution>
-                    </executions>
                     <configuration>
                         <compilerArgs>
                             <arg>-Xlint:all</arg>
