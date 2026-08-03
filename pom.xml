@@ -40,7 +40,7 @@
         <nexus.staging.repository>yasson-maven2-staging</nexus.staging.repository>
 
         <!--Dependencies-->
-        <hamcrest.version>2.2</hamcrest.version>
+        <hamcrest.version>3.0</hamcrest.version>
         
         <!-- Jakarta API -->
         <!-- TODO finalize versions to EE 12 -->
