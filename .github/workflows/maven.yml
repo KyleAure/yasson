@@ -29,7 +29,7 @@ jobs:
 
     strategy:
       matrix:
-        java_version: [ 11, 17, 21 ]
+        java_version: [ 17, 21, 25 ]
         include:
           - locale: en_US
           # Use a different locale when running against one of the java versions
@@ -54,6 +54,8 @@ jobs:
         run: mvn -B checkstyle:checkstyle
       - name: Yasson install
         run: mvn -U -C clean install -DskipTests
+      - name: Yasson jmh package
+        run: mvn -U -C -f yasson-jmh/pom.xml clean package
       - name: Yasson tests
         run: |
           export LANG_TAG="${{ matrix.locale }}"
@@ -62,5 +64,5 @@ jobs:
             -Duser.language="${LANG_TAG%%_*}" \
             -Duser.country="${LANG_TAG##*_}" \
             verify
-      - name: JSONB-API TCK
+      - name: Jakarta JSON-B TCK
         run: cd yasson-tck && mvn -U -B test -DargLine="-Djava.locale.providers=COMPAT"
