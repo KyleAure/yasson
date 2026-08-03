@@ -23,10 +23,10 @@
         <version>2.0.4</version>
     </parent>
 
-     <!-- Published under the OLD group ID intentionally. -->
+    <!-- Published under the OLD group ID intentionally. -->
     <groupId>org.eclipse</groupId>
     <artifactId>yasson</artifactId>
-    <version>3.0.5-SNAPSHOT</version>
+    <version>3.0.5</version>
     <packaging>pom</packaging>
     <name>Yasson</name>
     <description>
@@ -38,7 +38,6 @@
         <relocation>
             <groupId>org.eclipse.yasson</groupId>
             <artifactId>yasson</artifactId>
-            <version>${project.version}</version>
             <message>
                 The groupId has changed from org.eclipse to org.eclipse.yasson.
                 Update your dependency to org.eclipse.yasson:yasson.
@@ -54,6 +53,13 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <skipSource>true</skipSource>
                 </configuration>
             </plugin>
         </plugins>
