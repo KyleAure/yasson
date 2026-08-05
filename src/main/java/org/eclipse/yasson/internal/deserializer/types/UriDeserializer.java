@@ -19,6 +19,8 @@ import java.net.URISyntaxException;
 import jakarta.json.bind.JsonbException;
 
 import org.eclipse.yasson.internal.DeserializationContextImpl;
+import org.eclipse.yasson.internal.properties.MessageKeys;
+import org.eclipse.yasson.internal.properties.Messages;
 
 /**
  * Deserializer of the {@link URI} type.
@@ -34,8 +36,7 @@ class UriDeserializer extends TypeDeserializer {
         try {
             return new URI(value);
         } catch (URISyntaxException e) {
-            // Exception will be caught and wrapped
-            throw new JsonbException("java.net.URI could not parse value " + value, e);
+            throw new JsonbException(Messages.getMessage(MessageKeys.URI_PARSE_ERROR, value), e);
         }
     }
 }

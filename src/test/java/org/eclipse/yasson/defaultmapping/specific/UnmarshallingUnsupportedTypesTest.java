@@ -230,13 +230,23 @@ public class UnmarshallingUnsupportedTypesTest {
     @Test
     public void testMalformedURL() {
         Type type = new TestTypeToken<ScalarValueWrapper<URL>>(){}.getType();
-        assertFail("{\"value\":\"www.oracle.com\"}", type, "value", URL.class);
+        try {
+            defaultJsonb.fromJson("{\"value\":\"www.oracle.com\"}", type);
+            fail("Expected to catch JsonbException but did not");
+        } catch (JsonbException e) {
+            assertTrue(e.getMessage().contains("Cannot parse URL") && e.getMessage().contains("www.oracle.com"));
+        }
     }
-    
+
     @Test
     public void testMalformedURI() {
         Type type = new TestTypeToken<ScalarValueWrapper<URI>>(){}.getType();
-        assertFail("{\"value\":\"www .oracle .com\"}", type, "value", URI.class);
+        try {
+            defaultJsonb.fromJson("{\"value\":\"www .oracle .com\"}", type);
+            fail("Expected to catch JsonbException but did not");
+        } catch (JsonbException e) {
+            assertTrue(e.getMessage().contains("Cannot parse URI") && e.getMessage().contains("www .oracle .com"));
+        }
     }
 
     private void assertFail(String json, Type type, String failureProperty, Class<?> failurePropertyClass) {

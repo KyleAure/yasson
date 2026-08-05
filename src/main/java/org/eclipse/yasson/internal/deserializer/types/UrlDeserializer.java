@@ -19,6 +19,8 @@ import java.net.URL;
 import jakarta.json.bind.JsonbException;
 
 import org.eclipse.yasson.internal.DeserializationContextImpl;
+import org.eclipse.yasson.internal.properties.MessageKeys;
+import org.eclipse.yasson.internal.properties.Messages;
 
 /**
  * Deserializer of the {@link URL} type.
@@ -34,8 +36,7 @@ class UrlDeserializer extends TypeDeserializer {
         try {
             return new URL(value);
         } catch (MalformedURLException e) {
-            // Exception will be caught and wrapped
-            throw new JsonbException("java.net.URL could not parse value " + value, e);
+            throw new JsonbException(Messages.getMessage(MessageKeys.URL_PARSE_ERROR, value), e);
         }
     }
 }
