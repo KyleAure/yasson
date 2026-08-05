@@ -51,7 +51,7 @@ jobs:
               with:
                 name: Java JMH Benchmark
                 tool: 'jmh'
-                output-file-path: jmh-result.json
+                output-file-path: yasson-jmh/jmh-result.json
                 github-token: ${{ secrets.GITHUB_TOKEN }}
             
                 # Enable deployment to GitHub Pages for continuous line graphs
