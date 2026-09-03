@@ -190,4 +190,22 @@ public class RecordTest {
         assertThat(deserialized.type(), is("skoda"));
         assertThat(deserialized.color(), is("green"));
     }
+
+    /**
+     * A virtual accessor method whose name starts with {@code get} must NOT have its
+     * prefix stripped when serialized from a record.  JavaBean name-mangling only applies
+     * to regular classes; for records the raw method name is used as the JSON key.
+     * <p>
+     * So {@code getDisplayName()} on a record must serialize as {@code "getDisplayName"},
+     * not as {@code "displayName"}.
+     */
+    @Test
+    public void testRecordGetterStyleVirtualAttributeIsNotStripped() {
+        RecordWithGetterStyleVirtualAttribute record =
+                new RecordWithGetterStyleVirtualAttribute("skoda", "green");
+        String json = Jsonbs.defaultJsonb.toJson(record);
+
+        assertThat(json, containsString("\"getDisplayName\":\"skoda (green)\""));
+        assertThat(json, not(containsString("\"displayName\"")));
+    }
 }
